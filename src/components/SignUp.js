@@ -4,10 +4,13 @@ import { createUser } from "../services/redis";
 function SignUp() {
 	function handleSignUp() {
 		console.log("Sign Up clicked");
-		const result = createUser("AnshKumar", "ansh.khalasi@gmail.com");
-		console.log(result);
+		createUser("AnshKumar", "ansh.khalasi@gmail.com")
+		.then((response) => {
+			if (response === true) {
+				console.log("Successfully signed up!");
+			}
+		});
 	}
-
 	return <button onClick={handleSignUp}>Sign Up</button>;
 }
 
