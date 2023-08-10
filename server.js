@@ -15,30 +15,23 @@ app.use(
 	})
 );
 
+// creates a user with username and email
 app.post("/api/redis/user/createUser", (req, res) => {
 	// expected to receive username and email
 	const { username, email } = req.body;
 	console.log("Received data: ", username, email);
 	// res.json({"successful": true});
 	try {
-		redisClient.set(username, email, (err, data) => {
-			if (err) {
-				console.error("Redis Error: ", err);
-				return res.status(500).json({ error: "Internal Server Error" });
-			}
-			if (data) {
+		redisClient.set(username, email).then((response) => {
+			if (response === "OK") {
 				res.json({
-					successful: true
-				});
-			} else {
-				res.json({
-					successful: false
+					"successful": true
 				});
 			}
 		});
 	} catch (error) {
 		res.json({
-			successful: false
+			"successful": false
 		});
 	}
 });

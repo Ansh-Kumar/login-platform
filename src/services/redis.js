@@ -13,19 +13,13 @@ function createUser(username, email) {
 			email: email
 		})
 	})
-		.then((response) => {
-			const data = response.json();
-			console.log(data);
-		})
-
-		.then((response) => response.json())
-		.then((data) => {
-			console.log("Created new user");
-			console.log(data); /// successful: true
-		})
-		.catch((err) => {
-			console.error(err);
-		});
+	.then((response) => response.json())
+	.then((data) => {
+		console.log(data);
+	})
+	.catch((err) => {
+		console.error(err);
+	})
 	console.log("finished createUser");
 }
 
